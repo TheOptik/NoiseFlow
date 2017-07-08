@@ -13,7 +13,7 @@ public class FlowField {
 	int height;
 	int resolution;
 	private final Perlin perlin;
-	private final double[][] values;
+	private final double[][] flowFieldData;
 	private double z = 0;
 
 	public FlowField(int width, int height, int resolution) {
@@ -22,18 +22,22 @@ public class FlowField {
 		this.resolution = resolution;
 		perlin = new Perlin();
 		perlin.setSeed(new Random().nextInt());
-		values = new double[(int) Math.ceil((double) width / resolution)][(int) Math
+		flowFieldData = new double[(int) Math.ceil((double) width / resolution)][(int) Math
 				.ceil((double) height / resolution)];
-		populateData(values, perlin, z, resolution);
+		populateData(flowFieldData, perlin, z, resolution);
+	}
+
+	public double getValue(double x, double y) {
+		return getValue((int) x, (int) y);
 	}
 
 	public double getValue(int x, int y) {
-		return values[x / resolution][y / resolution];
+		return flowFieldData[x / resolution][y / resolution];
 	}
 
 	public void update() {
 		z += 0.005;
-		populateData(values, perlin, z, resolution);
+		populateData(flowFieldData, perlin, z, resolution);
 	}
 
 	private static void populateData(double[][] values, Perlin perlin, double time, double resolution) {
@@ -45,9 +49,9 @@ public class FlowField {
 	}
 
 	public void draw(GraphicsContext graphicsContext2D) {
-		for (int x = 0; x < values.length; x++) {
-			for (int y = 0; y < values[0].length; y++) {
-				graphicsContext2D.setFill(Color.hsb(values[x][y], 1, 1));
+		for (int x = 0; x < flowFieldData.length; x++) {
+			for (int y = 0; y < flowFieldData[0].length; y++) {
+				graphicsContext2D.setFill(Color.hsb(flowFieldData[x][y], 1, 1));
 				graphicsContext2D.fillRect(x * resolution, y * resolution, resolution, resolution);
 			}
 		}
