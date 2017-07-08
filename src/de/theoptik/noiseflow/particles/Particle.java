@@ -2,7 +2,7 @@ package de.theoptik.noiseflow.particles;
 
 import java.util.Random;
 
-import de.theoptik.noiseflow.flowField.FlowField;
+import de.theoptik.noiseflow.flowfield.FlowField;
 import de.theoptik.noiseflow.gui.Launcher;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -12,6 +12,7 @@ import javafx.scene.paint.Color;
 public class Particle {
 
 	public static final DoubleProperty FIELD_INFLUENCE = new SimpleDoubleProperty(0.1);
+	public static final DoubleProperty PARTICLE_OPACITY = new SimpleDoubleProperty(1);
 	public static final DoubleProperty MAX_VEL = new SimpleDoubleProperty(5);
 	private static final Random RANDOM = new Random();
 
@@ -77,7 +78,7 @@ public class Particle {
 
 	public void draw(GraphicsContext canvas, boolean colorMode) {
 		if (colorMode) {
-			Color c = Color.hsb(Math.toDegrees(Math.atan2(yVel, xVel)), 1, 1, 1);
+			Color c = Color.hsb(Math.toDegrees(Math.atan2(yVel, xVel)), 1, 1, PARTICLE_OPACITY.get());
 			canvas.setStroke(c);
 		}
 		canvas.strokeLine(previousX, previousY, x, y);

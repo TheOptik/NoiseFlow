@@ -1,13 +1,19 @@
-package de.theoptik.noiseflow.flowField;
+package de.theoptik.noiseflow.flowfield;
 
 import java.util.Random;
 
 import com.flowpowered.noise.module.source.Perlin;
 
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
 public class FlowField {
+
+	public static final DoubleProperty FLOW_FIELD_HUE = new SimpleDoubleProperty(1);
+	public static final DoubleProperty FLOW_FIELD_SATURATION = new SimpleDoubleProperty(1);
+	public static final DoubleProperty FLOW_FIELD_OPACITY = new SimpleDoubleProperty(0.3);
 
 	int width;
 	int height;
@@ -51,7 +57,8 @@ public class FlowField {
 	public void draw(GraphicsContext graphicsContext2D) {
 		for (int x = 0; x < flowFieldData.length; x++) {
 			for (int y = 0; y < flowFieldData[0].length; y++) {
-				graphicsContext2D.setFill(Color.hsb(flowFieldData[x][y], 1, 1));
+				graphicsContext2D.setFill(Color.hsb(flowFieldData[x][y], FLOW_FIELD_HUE.get(),
+						FLOW_FIELD_SATURATION.get(), FLOW_FIELD_OPACITY.get()));
 				graphicsContext2D.fillRect(x * resolution, y * resolution, resolution, resolution);
 			}
 		}
