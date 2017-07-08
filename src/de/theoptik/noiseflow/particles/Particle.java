@@ -1,9 +1,9 @@
-package particles;
+package de.theoptik.noiseflow.particles;
 
-import flowField.FlowField;
+import de.theoptik.noiseflow.flowField.FlowField;
+import de.theoptik.noiseflow.test.Launcher;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-import test.Launcher;
 
 public class Particle {
 

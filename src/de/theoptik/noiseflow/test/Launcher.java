@@ -1,4 +1,4 @@
-package test;
+package de.theoptik.noiseflow.test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +6,8 @@ import java.util.List;
 import com.flowpowered.noise.NoiseQuality;
 import com.flowpowered.noise.module.source.Perlin;
 
-import flowField.FlowField;
+import de.theoptik.noiseflow.flowField.FlowField;
+import de.theoptik.noiseflow.particles.Particle;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -14,7 +15,6 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import particles.Particle;
 
 public class Launcher extends Application {
 

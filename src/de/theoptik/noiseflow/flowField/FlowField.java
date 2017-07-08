@@ -1,4 +1,4 @@
-package flowField;
+package de.theoptik.noiseflow.flowField;
 
 import com.flowpowered.noise.module.source.Perlin;
 
