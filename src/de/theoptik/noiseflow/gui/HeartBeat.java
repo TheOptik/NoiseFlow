@@ -9,16 +9,18 @@ import java.util.List;
 import de.theoptik.noiseflow.flowField.FlowField;
 import de.theoptik.noiseflow.particles.Particle;
 import javafx.animation.AnimationTimer;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.paint.Color;
 
 public class HeartBeat extends AnimationTimer {
+	public static final BooleanProperty drawFlowField = new SimpleBooleanProperty(false);
 	private static final Color BACKGROUND_COLOR = new Color(0.1, 0.1, 0.1, 0.2);
 
 	private final Canvas canvas;
 	private final FlowField flowField;
 	private final List<Particle> particles;
-	private boolean drawFlowField = false;
 
 	public HeartBeat(Canvas canvas, FlowField flowField, List<Particle> particles) {
 		this.canvas = canvas;
@@ -29,7 +31,7 @@ public class HeartBeat extends AnimationTimer {
 	@Override
 	public void handle(long now) {
 		flowField.update();
-		if (drawFlowField) {
+		if (drawFlowField.get()) {
 			flowField.draw(canvas.getGraphicsContext2D());
 		}
 		canvas.getGraphicsContext2D().setFill(BACKGROUND_COLOR);

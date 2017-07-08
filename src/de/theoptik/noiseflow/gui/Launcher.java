@@ -6,8 +6,13 @@ import java.util.List;
 import de.theoptik.noiseflow.flowField.FlowField;
 import de.theoptik.noiseflow.particles.Particle;
 import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -44,11 +49,26 @@ public class Launcher extends Application {
 		canvas = new Canvas(WIDTH, HEIGHT);
 		canvas.getGraphicsContext2D().setStroke(DEFAULT_COLOR);
 		canvas.getGraphicsContext2D().setFill(DEFAULT_COLOR);
-		VBox root = new VBox(canvas);
+
+		Node controll = generateControll();
+		StackPane root = new StackPane(canvas, controll);
 		primaryStage.setScene(new Scene(root));
 		primaryStage.show();
 		primaryStage.setOnCloseRequest((WindowEvent event) -> System.exit(0));
 		primaryStage.setFullScreen(true);
+	}
+
+	private Node generateControll() {
+		VBox controll = new VBox();
+		controll.getChildren().add(new NamedControlSlider("Max Velocity", Particle.MAX_VEL, 1, 50));
+		controll.getChildren().add(new NamedControlSlider("Flow Field Influence", Particle.FIELD_INFLUENCE, 0, 4));
+		controll.getChildren().add(new NamedCheckBox("Draw Flow Field", HeartBeat.drawFlowField));
+		controll.setPadding(new Insets(HEIGHT / 8, 0, 0, 0));
+		controll.setAlignment(Pos.TOP_LEFT);
+
+		BorderPane overlay = new BorderPane();
+		overlay.setRight(controll);
+		return overlay;
 	}
 
 	private void initializeParticles() {

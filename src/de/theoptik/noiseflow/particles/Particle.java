@@ -4,13 +4,16 @@ import java.util.Random;
 
 import de.theoptik.noiseflow.flowField.FlowField;
 import de.theoptik.noiseflow.gui.Launcher;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
 public class Particle {
 
+	public static final DoubleProperty FIELD_INFLUENCE = new SimpleDoubleProperty(0.1);
+	public static final DoubleProperty MAX_VEL = new SimpleDoubleProperty(5);
 	private static final Random RANDOM = new Random();
-	private static final double MAX_VEL = 5;
 
 	protected double x;
 	protected double y;
@@ -50,11 +53,11 @@ public class Particle {
 	}
 
 	private void updateVelocity(FlowField flowField) {
-		xVel += Math.cos(Math.toRadians(flowField.getValue(x, y))) * 0.1;
-		yVel += Math.sin(Math.toRadians(flowField.getValue(x, y))) * 0.1;
+		xVel += Math.cos(Math.toRadians(flowField.getValue(x, y))) * FIELD_INFLUENCE.get();
+		yVel += Math.sin(Math.toRadians(flowField.getValue(x, y))) * FIELD_INFLUENCE.get();
 
-		xVel = Math.signum(xVel) * Math.min(Math.abs(xVel), MAX_VEL);
-		yVel = Math.signum(yVel) * Math.min(Math.abs(yVel), MAX_VEL);
+		xVel = Math.signum(xVel) * Math.min(Math.abs(xVel), MAX_VEL.get());
+		yVel = Math.signum(yVel) * Math.min(Math.abs(yVel), MAX_VEL.get());
 	}
 
 	private void keepParticlesInBoundry() {
