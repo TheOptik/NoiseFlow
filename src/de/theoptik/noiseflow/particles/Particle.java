@@ -45,8 +45,8 @@ public class Particle {
 			y -= Launcher.HEIGHT;
 			py = y;
 		}
-		xVel += Math.cos(Math.toRadians(flowField.getValue((int) x, (int) y)));
-		yVel += Math.sin(Math.toRadians(flowField.getValue((int) x, (int) y)));
+		xVel += Math.cos(Math.toRadians(flowField.getValue((int) x, (int) y))) * 0.1;
+		yVel += Math.sin(Math.toRadians(flowField.getValue((int) x, (int) y))) * 0.1;
 
 		xVel = Math.signum(xVel) * Math.min(Math.abs(xVel), MAX_VEL);
 		yVel = Math.signum(yVel) * Math.min(Math.abs(yVel), MAX_VEL);
@@ -57,8 +57,8 @@ public class Particle {
 
 	public void draw(GraphicsContext canvas, boolean color) {
 		if (color) {
-			Color c = Color.hsb(x / xVel + Math.random() * 80, 1, 1);
-			canvas.setStroke(new Color(c.getRed(), c.getGreen(), c.getBlue(), 0.1));
+			Color c = Color.hsb(Math.toDegrees(Math.atan2(yVel, xVel)), 1, 1, 1);
+			canvas.setStroke(c);
 		}
 		canvas.strokeLine(px, py, x, y);
 	}

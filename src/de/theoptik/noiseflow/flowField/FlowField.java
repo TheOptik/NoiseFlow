@@ -1,5 +1,7 @@
 package de.theoptik.noiseflow.flowField;
 
+import java.util.Random;
+
 import com.flowpowered.noise.module.source.Perlin;
 
 import javafx.scene.canvas.GraphicsContext;
@@ -19,6 +21,7 @@ public class FlowField {
 		this.height = height;
 		this.resolution = resolution;
 		perlin = new Perlin();
+		perlin.setSeed(new Random().nextInt());
 		values = new double[(int) Math.ceil((double) width / resolution)][(int) Math
 				.ceil((double) height / resolution)];
 		populateData(values, perlin, z, resolution);
@@ -36,7 +39,7 @@ public class FlowField {
 	private static void populateData(double[][] values, Perlin perlin, double time, double resolution) {
 		for (int x = 0; x < values.length; x++) {
 			for (int y = 0; y < values[0].length; y++) {
-				values[x][y] = (perlin.getValue(x * 0.005 * resolution, y * 0.005 * resolution, time) + 1) * 128;
+				values[x][y] = ((perlin.getValue(x * 0.005 * resolution, y * 0.005 * resolution, time) + 1) * 128) - 32;
 			}
 		}
 	}

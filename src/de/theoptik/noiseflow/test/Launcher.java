@@ -3,9 +3,6 @@ package de.theoptik.noiseflow.test;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.flowpowered.noise.NoiseQuality;
-import com.flowpowered.noise.module.source.Perlin;
-
 import de.theoptik.noiseflow.flowField.FlowField;
 import de.theoptik.noiseflow.particles.Particle;
 import javafx.animation.AnimationTimer;
@@ -15,12 +12,13 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 public class Launcher extends Application {
 
+	private static final int PARTICLE_COUNT = 100000;
 	public static final int WIDTH = 1920;
 	public static final int HEIGHT = 1080;
-	double z = 0;
 	private static final List<Particle> particles = new ArrayList<>();
 
 	FlowField flowField = new FlowField(WIDTH, HEIGHT, 5);
@@ -38,12 +36,12 @@ public class Launcher extends Application {
 		VBox root = new VBox(canvas);
 		primaryStage.setScene(new Scene(root));
 		primaryStage.show();
+		primaryStage.setOnCloseRequest((WindowEvent event) -> {
+			System.exit(0);
+		});
 		primaryStage.setFullScreen(true);
 
-		Perlin perlin = new Perlin();
-		perlin.setNoiseQuality(NoiseQuality.BEST);
-		perlin.setSeed((int) (Math.random() * 100000));
-		for (int i = 0; i < 100000; i++) {
+		for (int i = 0; i < PARTICLE_COUNT; i++) {
 			particles.add(new Particle(Math.random() * WIDTH, Math.random() * HEIGHT));
 		}
 
@@ -53,9 +51,9 @@ public class Launcher extends Application {
 			public void handle(long now) {
 				flowField.update();
 				// flowField.draw(canvas.getGraphicsContext2D());
-				// canvas.getGraphicsContext2D().setFill(new Color(1, 1, 1,
-				// 0.1));
-				// canvas.getGraphicsContext2D().fillRect(0, 0, WIDTH, HEIGHT);
+				canvas.getGraphicsContext2D().setFill(new Color(0.1, 0.1, 0.1, 0.2));
+				canvas.getGraphicsContext2D().fillRect(0, 0, WIDTH, HEIGHT);
+
 				List<Particle> copyOfParticles = new ArrayList<>();
 				copyOfParticles.addAll(particles);
 				for (Particle p : copyOfParticles) {
