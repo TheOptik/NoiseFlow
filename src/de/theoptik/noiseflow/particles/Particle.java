@@ -13,6 +13,8 @@ public class Particle {
 
 	public static final DoubleProperty FIELD_INFLUENCE = new SimpleDoubleProperty(0.1);
 	public static final DoubleProperty PARTICLE_OPACITY = new SimpleDoubleProperty(1);
+	public static final DoubleProperty PARTICLE_HUE = new SimpleDoubleProperty(1);
+	public static final DoubleProperty PARTICLE_SATURATION = new SimpleDoubleProperty(1);
 	public static final DoubleProperty MAX_VEL = new SimpleDoubleProperty(5);
 	private static final Random RANDOM = new Random();
 
@@ -26,8 +28,8 @@ public class Particle {
 	public Particle(double x, double y) {
 		this.x = x;
 		this.y = y;
-		this.previousX = x;
-		this.previousY = y;
+		previousX = x;
+		previousY = y;
 		xVel = getRandomVelocity();
 		yVel = getRandomVelocity();
 	}
@@ -49,8 +51,8 @@ public class Particle {
 	}
 
 	private void updatePosition() {
-		this.x += xVel * 0.2;
-		this.y += yVel * 0.2;
+		x += xVel * 0.2;
+		y += yVel * 0.2;
 	}
 
 	private void updateVelocity(FlowField flowField) {
@@ -78,7 +80,7 @@ public class Particle {
 
 	public void draw(GraphicsContext canvas, boolean colorMode) {
 		if (colorMode) {
-			Color c = Color.hsb(Math.toDegrees(Math.atan2(yVel, xVel)), 1, 1, PARTICLE_OPACITY.get());
+			final Color c = Color.hsb(Math.toDegrees(Math.atan2(yVel, xVel)), PARTICLE_HUE.get(), PARTICLE_SATURATION.get(), PARTICLE_OPACITY.get());
 			canvas.setStroke(c);
 		}
 		canvas.strokeLine(previousX, previousY, x, y);

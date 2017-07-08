@@ -6,6 +6,7 @@ import java.util.List;
 import de.theoptik.noiseflow.flowfield.FlowField;
 import de.theoptik.noiseflow.particles.Particle;
 import javafx.application.Application;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.StackPane;
@@ -21,7 +22,7 @@ public class Launcher extends Application {
 	public static final int HEIGHT = 1080;
 
 	private final List<Particle> particles = new ArrayList<>();
-	private FlowField flowField = new FlowField(WIDTH, HEIGHT, 5);
+	private final FlowField flowField = new FlowField(WIDTH, HEIGHT, 5);
 	private Canvas canvas;
 
 	public static void main(String[] args) {
@@ -36,7 +37,7 @@ public class Launcher extends Application {
 	}
 
 	private void startGameLoop() {
-		HeartBeat heartBeat = new HeartBeat(canvas, flowField, particles);
+		final HeartBeat heartBeat = new HeartBeat(canvas, flowField, particles);
 		heartBeat.start();
 	}
 
@@ -44,8 +45,9 @@ public class Launcher extends Application {
 		canvas = new Canvas(WIDTH, HEIGHT);
 		canvas.getGraphicsContext2D().setStroke(DEFAULT_COLOR);
 		canvas.getGraphicsContext2D().setFill(DEFAULT_COLOR);
-		ControlBoard control = new ControlBoard();
-		StackPane root = new StackPane(canvas, control.getOverlay());
+		final ControlBoard control = new ControlBoard();
+		final StackPane root = new StackPane(canvas, control.getOverlay());
+		root.setAlignment(Pos.TOP_RIGHT);
 		primaryStage.setScene(new Scene(root));
 		primaryStage.show();
 		primaryStage.setOnCloseRequest((WindowEvent event) -> System.exit(0));

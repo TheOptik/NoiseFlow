@@ -15,7 +15,7 @@ public class NamedCheckBox extends Group {
 	public NamedCheckBox(String name, BooleanProperty boundProperty) {
 		this.name = name;
 		this.boundProperty = boundProperty;
-		this.checkBox = new CheckBox();
+		checkBox = new CheckBox();
 		label = new Label(name.concat(": "));
 		checkBox.translateXProperty().bind(label.widthProperty());
 		checkBox.setSelected(boundProperty.get());
