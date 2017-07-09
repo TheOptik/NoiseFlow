@@ -9,6 +9,7 @@ import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -48,10 +49,12 @@ public class Launcher extends Application {
 		final ControlBoard control = new ControlBoard();
 		final StackPane root = new StackPane(canvas, control.getOverlay());
 		root.setAlignment(Pos.TOP_RIGHT);
-		primaryStage.setScene(new Scene(root));
+		Scene scene = new Scene(root);
+		primaryStage.setScene(scene);
 		primaryStage.show();
 		primaryStage.setOnCloseRequest((WindowEvent event) -> System.exit(0));
 		primaryStage.setFullScreen(true);
+		primaryStage.addEventHandler(KeyEvent.KEY_PRESSED, new ScreenshotListener(canvas));
 	}
 
 	private void initializeParticles() {

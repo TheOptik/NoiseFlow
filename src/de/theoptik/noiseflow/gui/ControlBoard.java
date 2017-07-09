@@ -19,7 +19,7 @@ public class ControlBoard {
 		final VBox control = new VBox();
 		final ObservableList<Node> children = control.getChildren();
 		// Global Variables
-		children.add(new NamedControlSlider("Fade", HeartBeat.FADE, 0, 1));
+		children.add(new NamedControlSlider("Fade", HeartBeat.FADE, 0, 0.3));
 		// Particle Variables
 		children.add(new NamedControlSlider("Max Velocity", Particle.MAX_VEL, 1, 10));
 		children.add(new NamedControlSlider("Flow Field Influence", Particle.FIELD_INFLUENCE, 0, 1));

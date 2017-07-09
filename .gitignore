@@ -21,3 +21,8 @@ hs_err_pid*
 *.test.*
 /bin/
 /target/
+
+
+# screenshots
+
+Screenshot*

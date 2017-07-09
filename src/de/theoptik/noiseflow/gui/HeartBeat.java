@@ -18,7 +18,7 @@ import javafx.scene.paint.Color;
 
 public class HeartBeat extends AnimationTimer {
 	public static final BooleanProperty DRAW_FLOW_FIELD = new SimpleBooleanProperty(false);
-	public static final DoubleProperty FADE = new SimpleDoubleProperty(0.8);
+	public static final DoubleProperty FADE = new SimpleDoubleProperty(0.3);
 
 	private final Canvas canvas;
 	private final FlowField flowField;
@@ -32,7 +32,7 @@ public class HeartBeat extends AnimationTimer {
 
 	@Override
 	public void handle(long now) {
-		canvas.getGraphicsContext2D().setFill(new Color(0.1, 0.1, 0.1, FADE.get()));
+		canvas.getGraphicsContext2D().setFill(new Color(0, 0, 0, FADE.get()));
 		canvas.getGraphicsContext2D().fillRect(0, 0, WIDTH, HEIGHT);
 		flowField.update();
 		if (DRAW_FLOW_FIELD.get()) {

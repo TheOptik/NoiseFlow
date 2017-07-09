@@ -25,6 +25,7 @@ public class NamedControlSlider extends Group {
 		this.disableProperty().bind(enabled.not());
 		label = new Label(name.concat(": "));
 		slider.translateXProperty().bind(label.widthProperty());
+		slider.setBlockIncrement((max - min) / 100);
 		slider.setMin(min);
 		slider.setMax(max);
 		slider.setValue(boundProperty.get());
