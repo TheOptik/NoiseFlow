@@ -5,14 +5,17 @@ import static de.theoptik.noiseflow.gui.Launcher.HEIGHT;
 import de.theoptik.noiseflow.flowfield.FlowField;
 import de.theoptik.noiseflow.particles.Particle;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
-public class ControlBoard {
+public class ControlBoard implements EventHandler<KeyEvent> {
 	protected final Group overlay;
 
 	public ControlBoard() {
@@ -51,4 +54,10 @@ public class ControlBoard {
 		return overlay;
 	}
 
+    @Override
+    public void handle(KeyEvent keyEvent) {
+        if(keyEvent.getCode() == KeyCode.M){
+            overlay.setVisible(!overlay.isVisible());
+        }
+    }
 }

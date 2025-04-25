@@ -55,6 +55,7 @@ public class Launcher extends Application {
 		primaryStage.setOnCloseRequest((WindowEvent event) -> System.exit(0));
 		primaryStage.setFullScreen(true);
 		primaryStage.addEventHandler(KeyEvent.KEY_PRESSED, new ScreenshotListener(canvas));
+        primaryStage.addEventHandler(KeyEvent.KEY_PRESSED, control);
 	}
 
 	private void initializeParticles() {

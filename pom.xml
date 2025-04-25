@@ -15,14 +15,31 @@
 					<target>1.8</target>
 				</configuration>
 			</plugin>
+            <plugin>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>0.0.1</version>
+                <configuration>
+                    <mainClass>de.theoptik.noiseflow.gui.Launcher</mainClass>
+                </configuration>
+            </plugin>
 		</plugins>
 	</build>
 	<dependencies>
-		<!-- https://mvnrepository.com/artifact/com.flowpowered/flow-noise -->
 		<dependency>
 			<groupId>com.flowpowered</groupId>
 			<artifactId>flow-noise</artifactId>
 			<version>1.0.0</version>
 		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>11</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-swing</artifactId>
+            <version>11</version>
+        </dependency>
+    </dependencies>
 </project>
